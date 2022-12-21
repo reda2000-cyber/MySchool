@@ -12,3 +12,8 @@ class classs (models.Model):
      mainProfessor = fields.Many2one('professor','Main Professor', ondelete='cascade')
      inscription_ids = fields.One2many('inscription', 'idClass', string='Inscriptions')
      module_ids = fields.One2many('module', 'idClass', string='Modules')
+
+
+
+
+

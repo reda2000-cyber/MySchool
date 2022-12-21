@@ -1,45 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-	<data>
-		<menuitem id="mainBar" name="Scholar"/> 
-		<record id="scholar_level_form_view" model="ir.ui.view">
+    <odoo>
+
+        <record id='level_action' model='ir.actions.act_window'>
+            <field name="name">level </field>
+            <field name="res_model">level</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        
+        <menuitem name="level " id="level_base_menu" />
+        <menuitem name="level " id="level_menu" parent="level_base_menu" action="level_action"/>
+
+        <!-- Form View -->
+        <record id="level_view_form" model="ir.ui.view">
             <field name="name">level.form</field>
             <field name="model">level</field>
-			<field name="arch" type="xml">
-				<form string="level" version="7.0">
-					<sheet>
-						<notebook>
-							<page string="Level Details">
-								<group>
-									<field name="idLevel"/>
-									<field name="name"/>
-									<field name="class_ids"/>
-								</group>
-							</page>
-						</notebook>
-					</sheet>
-				</form>
-			</field>
-		</record>
-		<record model="ir.ui.view" id="scholar_level_tree">
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Information ">
+                                
+								<field name="idLevel"/>
+								<field name="name"/>
+								<field name="level_ids"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        
+
+        <!-- Kaban View -->
+        <record id="level_view_kaban" model="ir.ui.view">
+            <field name="name">level.kanban</field>
+            <field name="model">level</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <kanban efault_group_by="state">
+                    <field name="idLevel"/>
+					<field name="name"/>
+					<field name="level_ids"/>
+                </kanban>
+            </field>
+        </record>
+
+
+
+		<!-- Tree View -->
+		<record model="ir.ui.view" id="level_tree">
 			<field name="name">level.tree</field>
 			<field name="model">level</field>
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
-				<tree string="Level list">
-                    <field name="idLevel"/>
-                    <field name="name"/>
-                    <field name="class_ids"/>
+				<tree string="level list">
+					<field name="idLevel"/>
+					<field name="name"/>
+					<field name="level_ids"/>
 				</tree>
 			</field>
 		</record>
-		<record model="ir.actions.act_window" id="action_level_seq">
-			<field name="name">Level management</field>
-			<field name="res_model">level</field>
-			<field name="view_type">form</field>
-			<field name="view_mode">tree,form</field>
-		</record>
-        <menuitem name="Management" id="mainManagement" parent="mainBar"/>
-        <menuitem name="Level" id="mainlevel" parent="mainManagement" action="action_level_seq"/>
-	</data>
-</openerp>
+
+
+    </odoo>
+
+
+

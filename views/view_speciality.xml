@@ -1,60 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-		 <menuitem id="mainBar" name="Scholar"/> 
-		 <record id="scholar_speciality_form_view" model="ir.ui.view">
+    <odoo>
+
+        <record id='speciality_action' model='ir.actions.act_window'>
+            <field name="name">speciality </field>
+            <field name="res_model">speciality</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        
+        <menuitem name="speciality " id="speciality_base_menu" />
+        <menuitem name="speciality " id="speciality_menu" parent="speciality_base_menu" action="speciality_action"/>
+
+        <!-- Form View -->
+        <record id="speciality_view_form" model="ir.ui.view">
             <field name="name">speciality.form</field>
             <field name="model">speciality</field>
             <field name="arch" type="xml">
-                <form string="speciality" version="7.0">
-					<sheet>
-						<notebook >
-							<page string="Details Speciality">
-								<group>
-                                    <field name="idSpeciality"/>
-                                    <field name="name"/>
-								</group>
-							</page>
-						</notebook>
-					</sheet>
-				</form>
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Information ">
+                                <field name="idSpeciality"/>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
             </field>
         </record>
-        <record model="ir.ui.view" id="scholar_speciality_tree">
-            <field name="name">speciality.tree</field>
+
+        
+
+        <!-- Kaban View -->
+        <record id="speciality_view_kaban" model="ir.ui.view">
+            <field name="name">speciality.kanban</field>
             <field name="model">speciality</field>
-            <field name="type">tree</field>
+            <field name="priority">10</field>
             <field name="arch" type="xml">
-                <tree string="Infos speciality">
+                <kanban efault_group_by="state">
                     <field name="idSpeciality"/>
                     <field name="name"/>
-                </tree>
+                </kanban>
             </field>
         </record>
-        <!--<record id="scholar_speciality_graph" model="ir.ui.view">
-            <field name="name">speciality.graph</field>
-                <field name="model">speciality</field>
-                <field name="arch" type="xml">
-                    <graph string="Specialities' statistics" type="bar">
-                        <field name="name"/>
-                        <field name="professor_ids" type="count"/>
-                    </graph>
-                </field>
-        </record>-->
-        <record model="ir.actions.act_window" id="action_speciality_seq">
-            <field name="name">Specialities</field>
-            <field name="res_model">speciality</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-				<p class="oe_view_nocontent_create">
-				  Click to create a speciality. 
-				</p><p>
-				  Each prof has to have a speciality.
-				</p>
+
+
+
+		<!-- Tree View -->
+		<record model="ir.ui.view" id="speciality_tree">
+			<field name="name">speciality.tree</field>
+			<field name="model">speciality</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="speciality list">
+                    <field name="idSpeciality"/>
+                    <field name="name"/>
+				</tree>
 			</field>
-        </record>
-       <menuitem name="Management" id="mainManagement" parent="mainBar"/>
-       <menuitem name="Speciality" id="mainSpeciality" parent="mainManagement" action="action_speciality_seq"/>
-    </data>
-</openerp>
+		</record>
+
+
+    </odoo>
+
+
+
+

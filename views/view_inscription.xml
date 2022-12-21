@@ -1,60 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-		 <menuitem id="mainBar" name="Scholar"/> 
-		 <record id="scholar_inscription_form_view" model="ir.ui.view">
+    <odoo>
+
+        <record id='inscription_action' model='ir.actions.act_window'>
+            <field name="name">inscription</field>
+            <field name="res_model">inscription</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        
+        <menuitem name="Inscription" id="inscription_base_menu" />
+        <menuitem name="Inscription" id="inscription_menu" parent="inscription_base_menu" action="inscription_action"/>
+
+        <!-- Form View -->
+        <record id="inscription_view_form" model="ir.ui.view">
             <field name="name">inscription.form</field>
             <field name="model">inscription</field>
             <field name="arch" type="xml">
-                <form string="inscription" version="7.0">
-					<sheet>
-						<notebook >
-							<page string="Details Inscription">
-                                <div class="oe_title">
-                                    <label for="idInscription" class="oe_edit_only"/>
-                                    <h3 class="idStyle">
-                                        <field name="idInscription" readonly="1"/>
-                                    </h3>
-                                    <div class="clear"></div>
-                                </div>
-								<group>
-                                    <field name="idClass" on_change="onchange_data(idEleve,idClass)"/>
-                                    <field name="idEleve" on_change="onchange_data(idEleve,idClass)"/>
-								</group>
-							</page>
-						</notebook>
-					</sheet>
-				</form>
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Information ">
+                                
+								<field name="idInscription"/>
+                                <field name="idClass"/>
+                                <field name="idinscription"/>
+                                <field name="created_at"/>
+
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
             </field>
         </record>
-        <record model="ir.ui.view" id="scholar_inscription_tree">
-            <field name="name">inscription.tree</field>
+
+        
+
+        <!-- Kaban View -->
+        <record id="inscription_view_kaban" model="ir.ui.view">
+            <field name="name">inscription.kanban</field>
             <field name="model">inscription</field>
-            <field name="type">tree</field>
+            <field name="priority">10</field>
             <field name="arch" type="xml">
-                <tree string="Infos Inscription">
+                <kanban efault_group_by="state">
                     <field name="idInscription"/>
                     <field name="idClass"/>
-                    <field name="idEleve"/>
+                    <field name="idinscription"/>
                     <field name="created_at"/>
-                </tree>
+                </kanban>
             </field>
         </record>
-        <record model="ir.actions.act_window" id="action_inscription_seq">
-            <field name="name">Inscriptions</field>
-            <field name="res_model">inscription</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-        <record id="scholar_inscription_search_view" model="ir.ui.view">
-            <field name="name">inscription.search</field>
-            <field name="model">inscription</field>
-            <field name="arch" type="xml">
-				<search string="Search inscription">
-				</search>
+
+
+
+		<!-- Tree View -->
+		<record model="ir.ui.view" id="inscription_tree">
+			<field name="name">inscription.tree</field>
+			<field name="model">inscription</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="inscription list">
+					<field name="idInscription"/>
+                    <field name="idClass"/>
+                    <field name="idinscription"/>
+                    <field name="created_at"/>
+				</tree>
 			</field>
 		</record>
-       <menuitem name="Management" id="mainManagement" parent="mainBar"/>
-       <menuitem name="Inscription" id="mainInscription" parent="mainManagement" action="action_inscription_seq"/>
-    </data>
-</openerp>
+
+
+
+
+
+    </odoo>

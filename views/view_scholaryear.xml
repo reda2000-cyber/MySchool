@@ -1,50 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-		 <menuitem id="mainBar" name="Scholar"/> 
-		 <record id="scholar_scholaryear_form_view" model="ir.ui.view">
+    <odoo>
+
+        <record id='scholaryear_action' model='ir.actions.act_window'>
+            <field name="name">scholaryear </field>
+            <field name="res_model">scholaryear</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        
+        <menuitem name="scholaryear " id="scholaryear_base_menu" />
+        <menuitem name="scholaryear " id="scholaryear_menu" parent="scholaryear_base_menu" action="scholaryear_action"/>
+
+        <!-- Form View -->
+        <record id="scholaryear_view_form" model="ir.ui.view">
             <field name="name">scholaryear.form</field>
             <field name="model">scholaryear</field>
             <field name="arch" type="xml">
-                <form string="scholaryear" version="7.0">
-					<sheet>
-						<notebook >
-							<page string="Details Scholar Years">
-								<group>
-                                    <field name="idScholarYear" readonly="1"/>
-                                    <field name="name" readonly="1"/>
-                                    <field name="startDate"/>
-                                    <field name="endDate"/>
-                                    <field name="idEtablishement" on_change="onchange_idEtablishement(idEtablishement)"/>
-								</group>
-							</page>
-						</notebook>
-					</sheet>
-				</form>
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Information ">
+                                <field name="idScholarYear"/>
+                                <field name="name"/>
+                                <field name="startDate"/>
+                                <field name="endDate"/>
+                                <field name="idEtablishement"/>
+                                <field name="class_ids"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
             </field>
         </record>
-        <record model="ir.ui.view" id="scholar_scholaryear_tree">
-            <field name="name">scholaryear.tree</field>
+
+        
+
+        <!-- Kaban View -->
+        <record id="scholaryear_view_kaban" model="ir.ui.view">
+            <field name="name">scholaryear.kanban</field>
             <field name="model">scholaryear</field>
-            <field name="type">tree</field>
+            <field name="priority">10</field>
             <field name="arch" type="xml">
-                <tree string="Infos scholaryear">
+                <kanban efault_group_by="state">
                     <field name="idScholarYear"/>
                     <field name="name"/>
                     <field name="startDate"/>
 					<field name="endDate"/>
                     <field name="idEtablishement"/>
                     <field name="class_ids"/>
-                </tree>
+                </kanban>
             </field>
         </record>
-        <record model="ir.actions.act_window" id="action_scholaryear_seq">
-            <field name="name">Scholar Years</field>
-            <field name="res_model">scholaryear</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-       <menuitem name="Management" id="mainManagement" parent="mainBar"/>
-       <menuitem name="Scholar Year" id="mainScholaryear" parent="mainManagement" action="action_scholaryear_seq"/>
-    </data>
-</openerp>
+
+
+
+		<!-- Tree View -->
+		<record model="ir.ui.view" id="scholaryear_tree">
+			<field name="name">scholaryear.tree</field>
+			<field name="model">scholaryear</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="scholaryear list">
+					<field name="idScholarYear"/>
+                    <field name="name"/>
+                    <field name="startDate"/>
+					<field name="endDate"/>
+                    <field name="idEtablishement"/>
+                    <field name="class_ids"/>
+				</tree>
+			</field>
+		</record>
+
+
+    </odoo>
+
+
+
+

@@ -1,60 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-	<data>
-		<menuitem id="mainBar" name="Scholar"/> 
-		<record id="scholar_module_form_view" model="ir.ui.view">
+    <odoo>
+
+        <record id='module_action' model='ir.actions.act_window'>
+            <field name="name">module </field>
+            <field name="res_model">module</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        
+        <menuitem name="module " id="module_base_menu" />
+        <menuitem name="module " id="module_menu" parent="module_base_menu" action="module_action"/>
+
+        <!-- Form View -->
+        <record id="module_view_form" model="ir.ui.view">
             <field name="name">module.form</field>
             <field name="model">module</field>
-			<field name="arch" type="xml">
-				<form string="module" version="7.0">
-					<sheet>
-						<notebook>
-							<page string="module Details">
-                                <div class="oe_title">
-									<label for="idModule" class="oe_edit_only"/>
-									<h3 class="idStyle">
-										<field name="idModule"  on_change="onchange_data(idModule,idClass)"/>
-									</h3>
-									<div class="clear"></div>
-								</div>
-								<group>
-									<field name="name"/>
-									<field name="idClass" on_change="onchange_data(idModule,idClass)"/>
-								</group>
-							</page>
-						</notebook>
-					</sheet>
-				</form>
-			</field>
-		</record>
-		<record model="ir.ui.view" id="scholar_module_tree">
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Information ">
+                                <field name="idModule"/>
+								<field name="name"/>
+								<field name="idClass"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        
+
+        <!-- Kaban View -->
+        <record id="module_view_kaban" model="ir.ui.view">
+            <field name="name">module.kanban</field>
+            <field name="model">module</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <kanban efault_group_by="state">
+                    <field name="idModule"/>
+                    <field name="name"/>
+					<field name="idClass"/>
+                </kanban>
+            </field>
+        </record>
+
+
+
+		<!-- Tree View -->
+		<record model="ir.ui.view" id="module_tree">
 			<field name="name">module.tree</field>
 			<field name="model">module</field>
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
-				<tree string="Modules list">
-                    <field name="idModule"/>
+				<tree string="module list">
+					<field name="idModule"/>
                     <field name="name"/>
 					<field name="idClass"/>
 				</tree>
 			</field>
 		</record>
-        <record id="scholar_module_search_view" model="ir.ui.view">
-            <field name="name">module.search</field>
-            <field name="model">module</field>
-            <field name="arch" type="xml">
-				<search string="Search module">
-				</search>
-			</field>
-		</record>
-		<record model="ir.actions.act_window" id="action_module_seq">
-			<field name="name">Modules</field>
-			<field name="res_model">module</field>
-			<field name="view_type">form</field>
-			<field name="view_mode">tree,form</field>
-		</record>
-        
-        <menuitem name="Management" id="mainManagement" parent="mainBar"/>
-        <menuitem name="Module" id="mainModule" parent="mainManagement" action="action_module_seq"/>
-	</data>
-</openerp>
+
+
+    </odoo>
+
+
+

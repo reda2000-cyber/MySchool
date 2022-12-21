@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-	<data>
-		<menuitem id="mainBar" name="Scholar"/> 
-		<record id="scholar_class_form_view" model="ir.ui.view">
+<odoo>
+
+		<record id='class_action' model='ir.actions.act_window'>
+			<field name="name">Class</field>
+			<field name="res_model">class</field>
+			<field name="view_mode">tree,form</field>
+    	</record>
+
+		<menuitem name="Class" id="class_base_menu" />
+    	<menuitem name="Class" id="class_menu" parent="class_base_menu" action="class_action"/>
+
+		<record id="class_form_view" model="ir.ui.view">
             <field name="name">class.form</field>
             <field name="model">class</field>
 			<field name="arch" type="xml">
@@ -21,7 +29,7 @@
 									<field name="name"/>
 									<field name="idLevel"/>
 									<field name="idScholarYear"/>
-									<field name="mainProfessor" on_change="onchange_prof(mainProfessor)"/>
+									<field name="mainProfessor" />
 									<field name="inscription_ids" readonly="1"/>
                                     <field name="module_ids"  readonly="1"/>
 								</group>
@@ -31,7 +39,7 @@
 				</form>
 			</field>
 		</record>
-		<record model="ir.ui.view" id="scholar_class_tree">
+		<record model="ir.ui.view" id="class_tree">
 			<field name="name">class.tree</field>
 			<field name="model">class</field>
 			<field name="type">tree</field>
@@ -48,26 +56,6 @@
 			</field>
 		</record>
 		
-        <record id="scholar_class_search_view" model="ir.ui.view">
-            <field name="name">class.search</field>
-            <field name="model">class</field>
-            <field name="arch" type="xml">
-				<search string="Search class">
-                    <separator orientation="horizontal"/>
-					<group expand="0" string="Group By...">
-                        <filter string="Level" icon="terp-project" domain="[]" context="{'group_by':'idLevel'}"/>
-                        <filter string="Scholar Year" icon="terp-project" domain="[]" context="{'group_by':'idScholarYear'}"/>
-                    </group>
-				</search>
-			</field>
-		</record>
-		<record model="ir.actions.act_window" id="action_class_seq">
-			<field name="name">Classes</field>
-			<field name="res_model">class</field>
-			<field name="view_type">form</field>
-			<field name="view_mode">tree,form</field>
-		</record>
-        <menuitem name="Management" id="mainManagement" parent="mainBar"/>
-        <menuitem name="Class" id="mainClass" parent="mainManagement" action="action_class_seq"/>
-	</data>
-</openerp>
+
+</odoo>
+

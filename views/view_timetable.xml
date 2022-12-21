@@ -73,3 +73,78 @@
         <menuitem name="Timetable" id="mainTimeTable" parent="mainManagement" action="action_timetable_seq"/>
 	</data>
 </openerp>
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+
+        <record id='timetable_action' model='ir.actions.act_window'>
+            <field name="name">timetable </field>
+            <field name="res_model">timetable</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        
+        <menuitem name="timetable " id="timetable_base_menu" />
+        <menuitem name="timetable " id="timetable_menu" parent="timetable_base_menu" action="timetable_action"/>
+
+        <!-- Form View -->
+        <record id="timetable_view_form" model="ir.ui.view">
+            <field name="name">timetable.form</field>
+            <field name="model">timetable</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Information ">
+                                <field name="idTimetable"/>
+								<field name="from"/>
+								<field name="to"/>
+								<field name="idModule"/>
+								<field name="idProfessor"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        
+
+        <!-- Kaban View -->
+        <record id="timetable_view_kaban" model="ir.ui.view">
+            <field name="name">timetable.kanban</field>
+            <field name="model">timetable</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <kanban efault_group_by="state">
+                    <field name="idTimetable"/>
+                    <field name="from"/>
+                    <field name="to"/>
+                    <field name="idModule"/>
+                    <field name="idProfessor"/>
+                </kanban>
+            </field>
+        </record>
+
+
+
+		<!-- Tree View -->
+		<record model="ir.ui.view" id="timetable_tree">
+			<field name="name">timetable.tree</field>
+			<field name="model">timetable</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="timetable list">
+                    <field name="idTimetable"/>
+                    <field name="from"/>
+                    <field name="to"/>
+                    <field name="idModule"/>
+                    <field name="idProfessor"/>
+				</tree>
+			</field>
+		</record>
+
+
+    </odoo>
+
+
+
+
